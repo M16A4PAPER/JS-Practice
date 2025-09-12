@@ -16,7 +16,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\Module 3\\classes.js"
+            "program": "${workspaceFolder}\\Module 4\\typeConversions.js"
         }
     ]
 }
