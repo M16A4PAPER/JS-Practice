@@ -16,7 +16,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\Module 3\\comments.js"
+            "program": "${workspaceFolder}\\Module 3\\booleans.js"
         }
     ]
 }
