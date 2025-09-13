@@ -16,7 +16,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\Module 5\\switch.js"
+            "console": "integratedTerminal",
+            "program": "${workspaceFolder}\\Project\\index.js"
         }
     ]
 }
