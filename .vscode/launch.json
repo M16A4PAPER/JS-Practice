@@ -17,7 +17,7 @@
                 "<node_internals>/**"
             ],
             "console": "integratedTerminal",
-            "program": "${workspaceFolder}\\Module 6\\for-loops.js"
+            "program": "${workspaceFolder}\\Project\\index.js"
         }
     ]
 }
