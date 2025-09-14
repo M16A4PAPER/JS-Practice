@@ -4,11 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach"
-        },
+    
         {
             "type": "node",
             "request": "launch",
@@ -17,7 +13,8 @@
                 "<node_internals>/**"
             ],
             "console": "integratedTerminal",
-            "program": "${workspaceFolder}\\Module 7\\functionDefinition.js"
+            "program": "${workspaceFolder}\\index.js",
+            "args": ["add"]
         }
     ]
 }
