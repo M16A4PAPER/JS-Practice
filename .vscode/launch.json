@@ -17,7 +17,7 @@
                 "<node_internals>/**"
             ],
             "console": "integratedTerminal",
-            "program": "${workspaceFolder}\\Module 7\\functionDefinition.js"
+            "program": "${workspaceFolder}\\Module 8\\sync-async.js"
         }
     ]
 }

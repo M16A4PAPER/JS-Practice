@@ -15,7 +15,7 @@ function getInput(promptText, validator, transformer) {
   let value = prompt(promptText);
   if(validator && !validator(value)){
     console.error(`--Invalid input`);
-    process.exit(1);
+    return getInput(promptText, validator, transformer);
   }
   if(transformer){
     return transformer(value);
@@ -56,6 +56,8 @@ const isStartDayValid = function (input) {
   }
   return true;
 };
+
+
 
 // Application commands ----------------------------------------------------
 
