@@ -14,7 +14,7 @@
             ],
             "console": "integratedTerminal",
             "program": "${workspaceFolder}\\index.js",
-            "args": ["add"]
+            "args": ["search-by-name"]
         }
     ]
 }

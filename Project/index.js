@@ -5,26 +5,35 @@ import employees from './data.json' with { type: 'json' }
 
 let prompt = createPrompt();
 
+const logEmployee = (employee) => {
+  Object.entries(employee).forEach(entry => {
+    console.log(`${entry[0]}: ${entry[1]}}`);
+  });
+}
+
 function getInput(promptText, validator, transformer) {
   let value = prompt(promptText);
   if(validator && !validator(value)){
     console.error(`--Invalid input`);
     process.exit(1);
   }
+  if(transformer){
+    return transformer(value);
+  }
   return value;
 };
 
 // Validator functions -----------------------------------------------------
 
-const isStringInputValid = function (input) {
+const isStringInputValid = (input) => {
   return (input) ? true : false;
 };
 
-const isBooleanInputValid = function (input) {
+const isBooleanInputValid = (input) => {
   return (input === "yes" || input === "no");
 };
 
-const isStartYearValid = function (input){
+const isStartYearValid = (input) => {
   let numValue = Number(input);
   if(!Number.isInteger(numValue) || numValue < 1990 || numValue > 2023){
     return false;
@@ -54,13 +63,10 @@ function listEmployees() {
   console.log(`Employee List ----------------------------`);
     console.log('');
 
-    for (let emp of employees) {
-      for (let property in emp) {
-        console.log(`${property}: ${emp[property]}`);
-      }
-      console.log('');
-      prompt('Press enter to continue...');
-    }
+    employees.forEach(e => {
+      logEmployee(e);
+      prompt(`Press enter to continue...`);
+    });
     console.log(`Employee list completed`);
 };
 
@@ -75,13 +81,46 @@ function addEmployee() {
     let startDateMonth = getInput("Employee Start Month (1 - 12): ", isStartMonthValid);
     let startDateDay = getInput("Employee Start Day (1 - 31): ", isStartDayValid);
     employee.startDate = new Date(startDateYear, startDateMonth - 1, startDateDay);
-    employee.isActive = getInput("Is employee active (yes or no): ", isBooleanInputValid);
+    employee.isActive = getInput("Is employee active (yes or no): ", isBooleanInputValid, i => (i === "yes"));
 
 
     // Output Employee JSON
     const json = JSON.stringify(employee, null, 2);
     console.log(`Employee: ${json}`);
 };
+
+// Search for employee by id
+function searchById(){
+  const id = getInput("Employee ID: ", null, Number);
+  const result = employees.find(e => e.id === id);
+  if(result){
+    console.log("");
+    logEmployee(result);
+  }
+  else{
+    console.log("No results...");
+  }
+};
+
+// Search for employee by name
+function searchByName(){
+  const firstNameSearch = getInput("FirstName: ").toLowerCase();
+  const lastNameSearch = getInput("Last Name: ").toLowerCase();
+  const results = employees.filter(e => {
+    if(firstNameSearch && !e.firstName.toLowerCase().includes(firstNameSearch)){
+      return false;
+    }
+    if(lastNameSearch && !e.lastName.toLowerCase().includes(lastNameSearch)){
+      return false;
+    }
+    return true;
+  });
+  results.forEach((e, idx) =>{
+    console.log("");
+    console.log(`Search Result ${idx + 1} ------------------------------------`);
+    logEmployee(e);
+  });
+}
 
 // Application execution ---------------------------------------------------
 
@@ -101,6 +140,14 @@ switch (command) {
 
   case 'add':
     addEmployee();
+    break;
+
+  case 'search-by-id':
+    searchById();
+    break;
+
+  case 'search-by-name':
+    searchByName();
     break;
 
   default:
